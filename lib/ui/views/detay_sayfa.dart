@@ -21,7 +21,8 @@ class DetaySayfa extends StatefulWidget {
   State<DetaySayfa> createState() => _DetaySayfaState();
 }
 
-class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateMixin {
+class _DetaySayfaState extends State<DetaySayfa>
+    with SingleTickerProviderStateMixin {
   var favlandi = false;
   var gizlebunu = true;
   var tutucu = 1;
@@ -30,19 +31,17 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     context.read<DetaySayfaCubit>().degerleriSifirla();
-    context.read<DetaySayfaCubit>().urunFiyatiniYollaIslemSoyle(int.parse(widget.yemek.yemek_fiyat), 1);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    context
+        .read<DetaySayfaCubit>()
+        .urunFiyatiniYollaIslemSoyle(int.parse(widget.yemek.yemek_fiyat), 1);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(Metinler.urunDetayi, style: TextStyle(fontFamily: Metinler.fontAdi)),
+          title: const Text(Metinler.urunDetayi,
+              style: TextStyle(fontFamily: Metinler.fontAdi)),
           actions: [
             IconButton(
                 onPressed: () {
@@ -61,7 +60,8 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
                 Icons.arrow_back_ios,
                 color: Renkler.beyazRenk,
               ))),
-      body: BlocBuilder<DetaySayfaCubit, UrunBilgileri>(builder: (context, gelenUrunBilgisi) {
+      body: BlocBuilder<DetaySayfaCubit, UrunBilgileri>(
+          builder: (context, gelenUrunBilgisi) {
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -83,26 +83,32 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
                 child: digerUrunlerimiziIncele(),
               ),
               Expanded(
-                child: BlocBuilder<AnasayfaCubit, List<Yemekler>>(builder: (context, liste) {
+                child: BlocBuilder<AnasayfaCubit, List<Yemekler>>(
+                    builder: (context, liste) {
                   if (liste.isNotEmpty) {
                     return Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: ListView.builder(
                         itemCount: liste.length,
                         itemBuilder: (context, indeks) {
-                          if (liste[indeks].yemek_adi == widget.yemek.yemek_adi) {
+                          if (liste[indeks].yemek_adi ==
+                              widget.yemek.yemek_adi) {
                             return const SizedBox.shrink();
                           }
                           return Padding(
                             padding: Sayilar.defaultPad,
                             child: Column(
                               children: [
-                                YemekAdiWidget(yemek: liste[indeks], yaziBuyuklugu: Sayilar.basBosluk),
+                                YemekAdiWidget(
+                                    yemek: liste[indeks],
+                                    yaziBuyuklugu: Sayilar.basBosluk),
                                 GestureDetector(
                                   onTap: () {
-                                    detaySayfadanBaskaUruneGec(context, liste, indeks);
+                                    detaySayfadanBaskaUruneGec(
+                                        context, liste, indeks);
                                   },
-                                  child: detaySayfaOzelResim(context, liste, indeks),
+                                  child: detaySayfaOzelResim(
+                                      context, liste, indeks),
                                 ),
                               ],
                             ),
@@ -124,14 +130,18 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
     );
   }
 
-  Text digerUrunlerimiziIncele() => const Text(Metinler.digerUrunler, style: TextStyle(fontFamily: Metinler.fontAdi));
+  Text digerUrunlerimiziIncele() => const Text(Metinler.digerUrunler,
+      style: TextStyle(fontFamily: Metinler.fontAdi));
 
-  Text toplamTutarOzelWidget(UrunBilgileri gelenUrunBilgisi, BuildContext context) {
+  Text toplamTutarOzelWidget(
+      UrunBilgileri gelenUrunBilgisi, BuildContext context) {
     return Text("${Metinler.tutar}₺${gelenUrunBilgisi.toplamFiyat.toString()}",
-        style: context.general.textTheme.titleLarge?.copyWith(fontFamily: Metinler.fontAdi));
+        style: context.general.textTheme.titleLarge
+            ?.copyWith(fontFamily: Metinler.fontAdi));
   }
 
-  SizedBox detaySayfaOzelResim(BuildContext context, List<Yemekler> liste, int indeks) {
+  SizedBox detaySayfaOzelResim(
+      BuildContext context, List<Yemekler> liste, int indeks) {
     return SizedBox(
       height: context.general.mediaQuery.size.width / 4,
       width: context.general.mediaQuery.size.height / 8,
@@ -144,7 +154,8 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
     );
   }
 
-  void detaySayfadanBaskaUruneGec(BuildContext context, List<Yemekler> liste, int indeks) {
+  void detaySayfadanBaskaUruneGec(
+      BuildContext context, List<Yemekler> liste, int indeks) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -155,7 +166,8 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
   ElevatedButton sepeteEkleButonu(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          backgroundColor: Renkler.siyahDetay, shape: RoundedRectangleBorder(borderRadius: Sayilar.defaultCircular)),
+          backgroundColor: Renkler.siyahDetay,
+          shape: RoundedRectangleBorder(borderRadius: Sayilar.defaultCircular)),
       onPressed: () {
         sepeteEkleOnePressed(context);
       },
@@ -166,16 +178,20 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
     );
   }
 
-  void sepeteEkleOnePressed(BuildContext context) {
+  Future<void> sepeteEkleOnePressed(BuildContext context) async {
     if (tutucu == 0) {
       print("0 adetle bir şey eklenmez");
     } else {
-      context.read<DetaySayfaCubit>().sepeteEkle(widget.yemek);
+      await context.read<DetaySayfaCubit>().sepeteEkle(widget.yemek);
       Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SepetSayfa(resimAdi: widget.yemek.yemek_resim_adi),
-          )).then((value) => context.read<SepetSayfaCubit>().sepettekiUrunleriCek("taylan_deneme"));
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    SepetSayfa(resimAdi: widget.yemek.yemek_resim_adi),
+              ))
+          .then((value) => context
+              .read<SepetSayfaCubit>()
+              .sepettekiUrunleriCek("taylan_deneme"));
     }
   }
 
@@ -205,9 +221,8 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
               backgroundColor: Renkler.detayaOzelRenk,
               child: IconButton(
                   onPressed: () {
-                    context
-                        .read<DetaySayfaCubit>()
-                        .urunFiyatiniYollaIslemSoyle(int.parse(widget.yemek.yemek_fiyat), Sayilar.kZeros);
+                    context.read<DetaySayfaCubit>().urunFiyatiniYollaIslemSoyle(
+                        int.parse(widget.yemek.yemek_fiyat), Sayilar.kZeros);
                     tutucu = gelenUrunBilgisi.secilenAdetSayisi;
                   },
                   icon: const Icon(Icons.remove)),
@@ -216,16 +231,16 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
               padding: Sayilar.defaultPad,
               child: Text(
                 gelenUrunBilgisi.secilenAdetSayisi.toString(),
-                style: const TextStyle(fontFamily: Metinler.fontAdi, fontSize: Sayilar.sized20),
+                style: const TextStyle(
+                    fontFamily: Metinler.fontAdi, fontSize: Sayilar.sized20),
               ),
             ),
             CircleAvatar(
               backgroundColor: Renkler.detayaOzelRenk,
               child: IconButton(
                   onPressed: () {
-                    context
-                        .read<DetaySayfaCubit>()
-                        .urunFiyatiniYollaIslemSoyle(int.parse(widget.yemek.yemek_fiyat), Sayilar.bir);
+                    context.read<DetaySayfaCubit>().urunFiyatiniYollaIslemSoyle(
+                        int.parse(widget.yemek.yemek_fiyat), Sayilar.bir);
                     tutucu = gelenUrunBilgisi.secilenAdetSayisi;
                   },
                   icon: const Icon(Icons.add)),
@@ -236,7 +251,8 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
     );
   }
 
-  YemekAdiWidget yemekAdiWidget() => YemekAdiWidget(yemek: widget.yemek, yaziBuyuklugu: Sayilar.yemekAdiBuyukluguDetay);
+  YemekAdiWidget yemekAdiWidget() => YemekAdiWidget(
+      yemek: widget.yemek, yaziBuyuklugu: Sayilar.yemekAdiBuyukluguDetay);
 
   SizedBox bosluk10() {
     return const SizedBox(
@@ -260,7 +276,8 @@ class _DetaySayfaState extends State<DetaySayfa> with SingleTickerProviderStateM
   Card resimUstuKartDetay(BuildContext context) {
     return Card(
         child: SizedBox(
-            height: context.general.mediaQuery.size.width / Sayilar.crossAxisAyari,
+            height:
+                context.general.mediaQuery.size.width / Sayilar.crossAxisAyari,
             width: context.general.mediaQuery.size.height / Sayilar.ucumbenim,
             child: Center(
               child: ClipOval(

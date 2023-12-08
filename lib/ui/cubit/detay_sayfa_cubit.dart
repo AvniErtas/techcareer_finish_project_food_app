@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yemekler_uygulamasi/data/entity/yemekler.dart';
 import 'package:yemekler_uygulamasi/data/repo/yemekler_dao_repository.dart';
+import 'package:yemekler_uygulamasi/ui/cubit/sepet_sayfa_cubit.dart';
 
 class UrunBilgileri {
   int secilenAdetSayisi;
