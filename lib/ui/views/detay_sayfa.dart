@@ -170,7 +170,7 @@ class _DetaySayfaState extends State<DetaySayfa>
           shape: RoundedRectangleBorder(borderRadius: Sayilar.defaultCircular)),
       onPressed: () {
         sepeteEkleOnePressed(context);
-      },
+      },//...
       child: Padding(
         padding: Sayilar.defaultTenPad,
         child: sepeteEkleYazisi(context),
