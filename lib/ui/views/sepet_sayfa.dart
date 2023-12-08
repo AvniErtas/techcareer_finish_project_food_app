@@ -33,7 +33,7 @@ class _SepetSayfaState extends State<SepetSayfa> {
           var urunAdi = urun.yemek_adi;
           var urunResimAdi = urun.yemek_resim_adi;
           var sepetYemekId = urun.sepet_yemek_id;
-
+//...
           var gruplanmisUrun = gruplanmisUrunler.putIfAbsent(
             urunAdi,
             () => GruplanmisUrun(
