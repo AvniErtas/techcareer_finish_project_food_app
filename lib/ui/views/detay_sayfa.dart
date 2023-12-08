@@ -170,7 +170,7 @@ class _DetaySayfaState extends State<DetaySayfa>
           shape: RoundedRectangleBorder(borderRadius: Sayilar.defaultCircular)),
       onPressed: () {
         sepeteEkleOnePressed(context);
-      },//...
+      }, //...
       child: Padding(
         padding: Sayilar.defaultTenPad,
         child: sepeteEkleYazisi(context),
@@ -181,6 +181,7 @@ class _DetaySayfaState extends State<DetaySayfa>
   Future<void> sepeteEkleOnePressed(BuildContext context) async {
     if (tutucu == 0) {
       print("0 adetle bir şey eklenmez");
+      print("devam");
     } else {
       await context.read<DetaySayfaCubit>().sepeteEkle(widget.yemek);
       Navigator.push(
